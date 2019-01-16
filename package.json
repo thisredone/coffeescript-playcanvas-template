@@ -4,8 +4,8 @@
     "description": "A template for running ES6 with PlayCanvas Editor",
     "main": "index.js",
     "scripts": {
-        "start": "webpack && webpack-dev-server --port 8081 --inline --hot",
-        "https": "webpack && webpack-dev-server --port 8081 --inline --hot --https",
+        "start": "webpack && webpack-dev-server --hot",
+        "https": "webpack && webpack-dev-server --hot --https",
         "build": "webpack -p"
     },
     "keywords": [

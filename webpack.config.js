@@ -49,8 +49,6 @@ if (process.env.NODE_ENV === 'production') {
 
   extraConfig = {
     mode: 'production',
-    plugins: [
-    ],
     module: {
       rules: [
         {
@@ -70,8 +68,9 @@ if (process.env.NODE_ENV === 'production') {
 
   extraConfig = {
     mode: 'development',
-    devtool: '#inline-source-map',
+    devtool: 'inline-source-map',
     devServer: {
+      port: 8081,
       disableHostCheck: true,
       contentBase: './build',
       hot: true,
