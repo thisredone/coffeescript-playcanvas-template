@@ -1,6 +1,6 @@
 # Notes about this fork
 
-CoffeeScript 2.0 is added, almost all the bloat is removed.
+CoffeeScript 2.0 is added, all the bloat is removed, all dependencies, including webpack, are up to date.
 
 HMR is working as long as you do this:
 
