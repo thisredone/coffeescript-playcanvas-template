@@ -1,12 +1,50 @@
+# Notes about this fork
+
+CoffeeScript 2.0 is added, almost all the bloat is removed.
+
+HMR is working as long as you do this:
+
+###### Instead of `PlayCanvas Script Method` from the instruction below
+
+- Download [Redirector](https://chrome.google.com/webstore/detail/redirector/ocgpenflpmgnfapjedencafcfakcekcd?hl=en) chrome extension
+- setup two redirects
+
+    1. One for script files
+        **Example URL**: http://launch.playcanvas.com/api/assets/files/main.build.js?id=11217398&branchId=00465776-6b83-4f4c-af75-01c351769fa8
+        **Include pattern**: launch.playcanvas.com/api/assets/files/(.+.js)?(.*)
+        **Redirect to**: http://localhost:8081/$1?$2
+        **Pattern type**: Regular Expression
+        In advanced options:
+        **Apply to**: Scripts and XMLHttpRequests (Ajax)
+    1. One for HMR updates
+        **Example URL**: http://launch.playcanvas.com/191247d10e518c420782.hot-update.json
+        **Include pattern**: launch.playcanvas.com/(.*).hot-update.(js|json)$
+        **Redirect to**: http://localhost:8081/$1.hot-update.$2
+        **Pattern type**: Regular Expression
+        In advanced options:
+        **Apply to**: Scripts and XMLHttpRequests (Ajax)
+- Launch [http://launch.playcanvas.com/{projectId}?debug=true&?local=http://localhost:8081](http://launch.playcanvas.com/%7BprojectId%7D?debug=true&?local=http://localhost:8081)
+
+
+
+
+
+
+
+
+> Original readme
+===
+
+
 # Introduction
 
 This is a template project for using ES6 via Babel and WebPack to build [PlayCanvas](https://playcanvas.com) projects.
 
-PlayCanvas is a fantastic open source WebGL Engine and online Editor (which you can get access to for free or pay for 
-an organisational license).  
+PlayCanvas is a fantastic open source WebGL Engine and online Editor (which you can get access to for free or pay for
+an organisational license).
 
 PlayCanvas have developed a shared model that means you can edit your 3D scenes as a collaborative experience with
-team mates around the office, or around the world - it's great.  They have applied the same to code editing, which 
+team mates around the office, or around the world - it's great.  They have applied the same to code editing, which
 is fine for some use cases but imposes certain limitations:
 
 * No offline access to source code
@@ -21,21 +59,21 @@ All of this means that it is hard to choose PlayCanvas for serious development p
 and that loses you many of the advantages of having a fantastic online editor and layout tool.  So now why choose
 PlayCanvas when Three.js would give you just as much if not more?
 
-The answer has to be to produce code in a proper offline build environment with all the advantages of Babel, WebPack, 
+The answer has to be to produce code in a proper offline build environment with all the advantages of Babel, WebPack,
 NPM et al and still be able to use the output in the PlayCanvas online Editor.  As no one had done this, and I needed
-it for a number of projects I took on the task myself.  This has lead to a number of NPM repos and a WebPackPlugin that 
+it for a number of projects I took on the task myself.  This has lead to a number of NPM repos and a WebPackPlugin that
 automate most of the process.
 
 ## Why ES6
 
 If you are asking why you should use ES6 and Babel then I'd say it's for one simple reason: a programming language
-should try to get the hell out of your way and let you express what you want.  
+should try to get the hell out of your way and let you express what you want.
 
-When we code Javascript for WebGL we are coding for the browser and nearly everything that touches the outside world 
-will be async.  Expressing async in traditional Javascript is messy as hell.  Try writing a for-next loop that loads 
+When we code Javascript for WebGL we are coding for the browser and nearly everything that touches the outside world
+will be async.  Expressing async in traditional Javascript is messy as hell.  Try writing a for-next loop that loads
 a list of things from the web in sequence using Promises or callbacks and it will become immediately obvious.  With
 Babel and ES6 it's just a loop.  Everything else is a christmas tree.  Yes it's possible, but it's easy to have a
-hard to spot bug, so you do LESS of it than you would otherwise and refactoring is a scary prospect.  That's not 
+hard to spot bug, so you do LESS of it than you would otherwise and refactoring is a scary prospect.  That's not
 right.  That's damaging your creativity to my mind.
 
 ```javascript
@@ -53,7 +91,7 @@ async function getData() {
 
 ```
 
-I know this is a contrived example, but this "kind of thing" happens all of the time in my developments, and they 
+I know this is a contrived example, but this "kind of thing" happens all of the time in my developments, and they
 are better for me being able to implement them easily. Write that as just promises or callbacks and it will be illegible
 to most developers without a lot of study.
 
@@ -78,7 +116,7 @@ WebPack is going to make building all of this and serving it to your browser an 
 
 # Getting Started
 
-The shortest way to get started is really simple. 
+The shortest way to get started is really simple.
 
 ## Prerequisites
 
@@ -109,16 +147,16 @@ develop in there or copy that whole directory structure somewhere you want to de
 
 The entry point - which is where you will import your own code - is in `src/main.js`
 
-In the template this imports a bunch of PlayCanvas extensions and then a single 
+In the template this imports a bunch of PlayCanvas extensions and then a single
 `example.js` script that uses a couple of ES6 features for a demo.
 
 ## Writing your own code
 
 Create a file in `src` or a sub directory and script what you like.  Just make sure that it is imported
-by `main.js` (note that paths are relative to `src` and must start with a `./`).  
+by `main.js` (note that paths are relative to `src` and must start with a `./`).
 When you start developing things that import each other, you just need
 to make sure that something in `main.js` imports something that imports the code you
-add!  
+add!
 
 If you find that something didn't show up, that's probably why.
 
@@ -132,7 +170,7 @@ of your code to PlayCanvas, but to start with, just copy the example to `config.
 
 You can build your code using either `webpack` or an automated process with `npm`.
 
-So typing `npm run build` in the root folder of the project (the parent of `src`) 
+So typing `npm run build` in the root folder of the project (the parent of `src`)
 the template will build a production version of your code into the `build` folder.
 
 **Either** build your code with NPM
@@ -148,7 +186,7 @@ webpack --config webpack.production.config.js
 The output file will be called `main.build.js`.  To use that in PlayCanvas just drag and drop
 it onto the PlayCanvas editor for your project.
 
-Now open your developer tools in the browser with the PlayCanvas Editor open and in 
+Now open your developer tools in the browser with the PlayCanvas Editor open and in
 the Javascript console type
 
 ```javascript
@@ -165,29 +203,29 @@ config.project.id
 
 And put that in the project id part of `config.json`
 
-Finally if you haven't already done it, drag `main.build.js` and drop it in the PlayCanvas assets window.  
+Finally if you haven't already done it, drag `main.build.js` and drop it in the PlayCanvas assets window.
 
-When it's imported click on it and in the properties window on the right, take it's ID and put that in 
+When it's imported click on it and in the properties window on the right, take it's ID and put that in
 `config.json` as your assetId.
 
-Now every time you run `npm run build` it will upload the result to PlayCanvas for you. 
+Now every time you run `npm run build` it will upload the result to PlayCanvas for you.
 
 ### Local serving your development build
 
 There's a better way to do ongoing development though, you only really need to upload your build when
 the attributes of something change, you add a new script or you want to publish your build.
 
-This template project has a solution for that too.  You will be able to see all of your 
+This template project has a solution for that too.  You will be able to see all of your
 source code in your developer tools when you use any means of making a `development` build.
 
 #### Loading Screen Method
 
 If you have a loading screen or can make one then you can use either the whole script in
 `utility-scripts/loading_screen_scripts_2_0.js` or add the `utility-scripts/exerpt.js` to
-the top of your own.  
+the top of your own.
 
-This will allow you to serve files locally if you add a `?local=http://localhost:8081` to 
-your launch url query string **AND** you change the protocol of the launch page to be `http`. 
+This will allow you to serve files locally if you add a `?local=http://localhost:8081` to
+your launch url query string **AND** you change the protocol of the launch page to be `http`.
 If you really need `https` then see the section later on how to do that instead.
 
 #### PlayCanvas Script Method
@@ -227,7 +265,7 @@ You can just use NPM like normal.  Basically find the module you need and type
 npm install --save <module-name>
 ```
 
-You can then import it into the file you need it in by adding an `import` statement at the 
+You can then import it into the file you need it in by adding an `import` statement at the
 top of your file.
 
 ```javascript
@@ -235,7 +273,7 @@ import blah from 'blah-module';
 
 ...
 
-blah(something); 
+blah(something);
 
 ```
 
@@ -250,7 +288,7 @@ which means that the output code will work on `99%` of browsers in the field.
 
 If you set it to `last 2 Chrome versions` then a lot more of ES6 is implemented
 already and there will be less work done, so a smaller output file
-(and possibly some code could be faster).  
+(and possibly some code could be faster).
 
 Using this method you could actually create multiple builds and choose between them.
 
@@ -280,8 +318,8 @@ are warned it isn't safe, just proceed anyway. This will mean that you always se
 launch page is untrusted and may cause other issues, it's normally fine for me.
 
 * Or: get your browser to trust `node_modules/webpack-dev-server/ssl/server.pem`. This can be
-easier said than done.  You can also replace `server.pem` with your own trusted `localhost` 
-certificate.  Just you'll have to pack it as a `.pem` file. (On Apple by default it will be a `.p12`, 
+easier said than done.  You can also replace `server.pem` with your own trusted `localhost`
+certificate.  Just you'll have to pack it as a `.pem` file. (On Apple by default it will be a `.p12`,
 Google for how to change it).
 
 **Don't forget to change your launch URL and the local parameter `?local=http://localhost:8081` to HTTPS!!**
@@ -289,4 +327,4 @@ Google for how to change it).
 Personally I've used [Certificate Tools](https://certificatetools.com) to make certs that work. Make sure you sent the `Subject
 Alternative Name(s) DNS` to `localhost` **as well as** `Common Names`.  It also provides you with a thing
 to run to pack .p12 into a .pem after you've generated your certificate.  It only took me about 5 tries
-to work out what I had to do with it! 
+to work out what I had to do with it!
