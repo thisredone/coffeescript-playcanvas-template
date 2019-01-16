@@ -9,19 +9,19 @@ HMR is working as long as you do this:
 - Download [Redirector](https://chrome.google.com/webstore/detail/redirector/ocgpenflpmgnfapjedencafcfakcekcd?hl=en) chrome extension
 - setup two redirects
 
-    1. One for script files
-        **Example URL**: http://launch.playcanvas.com/api/assets/files/main.build.js?id=11217398&branchId=00465776-6b83-4f4c-af75-01c351769fa8
-        **Include pattern**: launch.playcanvas.com/api/assets/files/(.+.js)?(.*)
-        **Redirect to**: http://localhost:8081/$1?$2
-        **Pattern type**: Regular Expression
-        In advanced options:
+    1. One for script files  
+        **Example URL**: http://launch.playcanvas.com/api/assets/files/main.build.js?id=11217398&branchId=00465776-6b83-4f4c-af75-01c351769fa8  
+        **Include pattern**: launch.playcanvas.com/api/assets/files/(.+.js)?(.*)  
+        **Redirect to**: http://localhost:8081/$1?$2  
+        **Pattern type**: Regular Expression  
+        In advanced options:  
         **Apply to**: Scripts and XMLHttpRequests (Ajax)
-    1. One for HMR updates
-        **Example URL**: http://launch.playcanvas.com/191247d10e518c420782.hot-update.json
-        **Include pattern**: launch.playcanvas.com/(.*).hot-update.(js|json)$
-        **Redirect to**: http://localhost:8081/$1.hot-update.$2
-        **Pattern type**: Regular Expression
-        In advanced options:
+    1. One for HMR updates  
+        **Example URL**: http://launch.playcanvas.com/191247d10e518c420782.hot-update.json  
+        **Include pattern**: launch.playcanvas.com/(.*).hot-update.(js|json)$  
+        **Redirect to**: http://localhost:8081/$1.hot-update.$2  
+        **Pattern type**: Regular Expression  
+        In advanced options:  
         **Apply to**: Scripts and XMLHttpRequests (Ajax)
 - Launch [http://launch.playcanvas.com/{projectId}?debug=true&?local=http://localhost:8081](http://launch.playcanvas.com/%7BprojectId%7D?debug=true&?local=http://localhost:8081)
 
@@ -31,9 +31,8 @@ HMR is working as long as you do this:
 
 
 
-
+---
 > Original readme
-===
 
 
 # Introduction
