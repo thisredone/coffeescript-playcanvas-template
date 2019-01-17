@@ -4,9 +4,9 @@
     "description": "A template for running ES6 with PlayCanvas Editor",
     "main": "index.js",
     "scripts": {
-        "start": "webpack && webpack-dev-server --hot",
-        "https": "webpack && webpack-dev-server --hot --https",
-        "build": "webpack -p"
+        "start": "webpack --env.development && webpack-dev-server --hot",
+        "https": "webpack --env.development && webpack-dev-server --hot --https",
+        "build": "webpack -p --env.production"
     },
     "keywords": [
         "PlayCanvas"
